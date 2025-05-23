@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta property="og:title" content="모빌리티 주간동향">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://ifh.cc/g/F4T0kC.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>모빌리티 주간 동향</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-blue: #0066FF;
+      --primary-dark: #003DD1;
+      --secondary-blue: #E6F1FF; 
+      --accent-green: #00C48C;
+      --text-primary: #1A1D29;
+      --text-secondary: #5A6573;
+      --text-muted: #8B95A7;
+      --bg-primary: #FAFBFC;
+      --bg-card: #FFFFFF;
+      --border-light: #E8EAED;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-feature-settings: 'kern' 1;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Enhanced Header */
+    .header {
+      background: linear-gradient(135deg, var(--bg-card) 0%, #F8FAFC 100%);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .header-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .logo-section img {
+      max-width: 280px;
+      width: 80%;
+      height: auto;
+      display: block;
+      margin: 36px auto 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .logo-section img {
+        max-width: 380px;
+        width: 95%;
+      }
+    }
+
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 26px;
+      height: 26px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z'/%3E%3Cpath d='M12 6v6l4 2-1 2-5-3V6z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .date-badge {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 0 24px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      height: 44px;
+      line-height: 1;
+    }
+
+    .date-badge::before {
+      content: "📊";
+      font-size: 16px;
+    }
+
+    .pdf-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0 24px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: var(--shadow-sm);
+      height: 44px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .pdf-btn:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+    }
+
+    .pdf-btn .pdf-icon {
+      width: 20px;
+      height: 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      margin: 0;
+    }
+
+    .pdf-btn .pdf-btn-text {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .pdf-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .pdf-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .pdf-content p {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .pdf-link {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .pdf-link:hover {
+      border-bottom-color: var(--primary-blue);
+    }
+
+    /* Enhanced Card Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 32px;
+      margin-bottom: 64px;
+      margin-top: 38px;
+    }
+
+    .news-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-blue);
+    }
+
+    .news-image {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .news-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+      pointer-events: none;
+    }
+
+    .news-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .news-card:hover .news-image img {
+      transform: scale(1.05);
+    }
+
+    .news-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .news-category {
+      display: inline-flex;
+      align-items: center;
+      background: var(--secondary-blue);
+      color: var(--primary-blue);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 6px 12px;
+      margin-bottom: 16px;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .news-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+
+    .news-summary {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .news-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .news-link {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+      color: white;
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 34px;
+    }
+
+    .news-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+    }
+
+    .news-link::after {
+      content: "→";
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .news-link:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* Enhanced Footer */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-light);
+      padding: 18px 0 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .footer-description {
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .footer-link:hover {
+      color: var(--primary-blue);
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 14px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      margin-top: 24px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .pdf-download.header-pdf {
+        margin: 8px 0 0 0;
+        justify-content: center;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pdf-download.header-pdf .pdf-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .news-content {
+        padding: 20px;
+      }
+
+      .news-image {
+        height: 200px;
+      }
+
+      .hero {
+        padding: 48px 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scroll animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .news-card {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .news-card:nth-child(1) { animation-delay: 0.1s; }
+    .news-card:nth-child(2) { animation-delay: 0.2s; }
+    .news-card:nth-child(3) { animation-delay: 0.3s; }
+    .news-card:nth-child(4) { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="logo.png" alt="모빌리티 주간동향 로고" />
+        </div>
+        <div class="header-row">
+          <div class="date-badge">250519</div>
+          <a href="https://drive.google.com/file/d/1FrsH02tymr7991old_Gcee0QsYHJqNzL/view" target="_blank" class="pdf-btn">
+            <span class="pdf-icon">📄</span>
+            <span class="pdf-btn-text">동향 보고서(PDF)</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="news-grid">
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://cdn.korearailroad.kr/news/photo/202409/403_483_392.png" alt="코레일, 외국인 맞춤형 철도 서비스 ‘인기’ " loading="lazy">
+        </div>
+        <div class="news-content">
+          <span class="news-category">코레일</span>
+          <h2 class="news-title">외국인 전용 교통+통신패스 인기</h2>
+          <p class="news-summary">
+            코레일과 LG유플러스가 협력한 외국인 전용 패스(나마네카드)가 주목받고 있습니다. 전국 지하철, 버스, 데이터망을 3~5일간 무제한 이용할 수 있어 관광객 편의성이 크게 향상되었습니다.
+          </p>
+          <div class="news-footer">
+            <a href="http://xn--https-hm5t//info.korail.com/info/selectBbsNttView.do;jsessionid=RK19A1TVstcPD0rXvBpW7O0V1bDBKGEFW3c9q7vcEzM17Cbml2TvSRssBNuZdjTQ?key=911&bbsNo=199&nttNo=24758&searchCtgry=&searchCnd=all&searchKrwd=&integrDeptCode=&pageIndex=1" target="_blank">자세히 보기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://thumb.zumst.com/530x0/https://static.news.zumst.com/images/10/2025/05/22/1a10e5d0c1a0408591084dc6966c0267.jpg" alt="서울 마을버스조합 무료환승 체계 이탈 예고" loading="lazy">
+        </div>
+        <div class="news-content">
+          <span class="news-category">서울</span>
+          <h2 class="news-title">마을버스조합, 대중교통 무료환승 체계 이탈 예고</h2>
+          <p class="news-summary">
+            서울 마을버스조합이 대중교통 무료환승 체계 이탈을 결의했습니다. 요금 인상과 환승손실금 반영 요구가 받아들여지지 않을 경우, 운행 중단도 불사하겠다는 입장입니다.
+          </p>
+          <div class="news-footer">
+            <a href="https://www.hani.co.kr/arti/area/capital/1198716.html#cb" class="news-link" target="_blank">자세히 보기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://img1.newsis.com/2025/05/19/NISI20250519_0020815137_web.jpg" alt="홍보캐릭터 대전" loading="lazy">
+        </div>
+        <div class="news-content">
+          <span class="news-category">광주</span>
+          <h2 class="news-title">홍보캐릭터 대전</h2>
+          <p class="news-summary">
+            ‘광주방문의 해’를 맞아 시청 야외에서 ‘빛돌이’ 캐릭터 결혼식 이벤트가 24일 열렸습니다. 전국 지자체 캐릭터들이 하객으로 참여하며 지역 홍보와 콘텐츠산업 활성화를 동시에 꾀했습니다.
+          </p>
+          <div class="news-footer">
+            <a href="https://sports.donga.com/news/article/all/20250519/131633507/1" class="news-link" target="_blank">자세히 보기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://cdn.voiceofbusan.com/news/photo/202505/1180_1072_5815.jpg" alt="광안대교 출근시간 확대" loading="lazy">
+        </div>
+        <div class="news-content">
+          <span class="news-category">부산</span>
+          <h2 class="news-title">광안대교 출근시간 할인 확대</h2>
+          <p class="news-summary">
+            오는 5월 26일부터 출퇴근(6~9시, 18~20시)경차 제외 전 차량 요금 할인 시간을 1시간 확대 시행한다고 밝혔습니다.
+          </p>
+          <div class="news-footer">
+            <a href="https://www.busan.go.kr/nbtnewsBU/1680624?curPage=1&srchBeginDt=2025-05-13&srchEndDt=2025-05-20&srchKey=&srchText=" target="_blank">자세히 보기</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <h3 class="footer-title">모빌리티 주간 동향</h3>
+        <p class="footer-description">
+          모빌리티의 트렌드와 정책 동향을 매주 정리하여 전해드립니다.
+        </p>
+        <div class="footer-copyright">
+          © 2025 Busan Metrobus Company Association. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
