@@ -50,12 +50,12 @@
 
     /* Enhanced Header */
     .header {
-      background: linear-gradient(135deg, var(--bg-card) 0%, #F8FAFC 100%);
+      background: #fff;
       border-bottom: 1px solid var(--border-light);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px);
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      padding: 30px 0 48px 0;
     }
 
     .header-content {
@@ -66,35 +66,49 @@
 
     .header-row {
       display: flex;
-      flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      gap: 16px;
-      margin-top: 18px;
-      margin-bottom: 8px;
-      width: 100%;
+      position: relative;
+      min-height: 120px;
+    }
+
+    .header-date {
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0;
+      margin: 0;
+      width: auto;
+      z-index: 2;
     }
 
     .logo-section {
+      position: absolute;
+      left: 50%;
+      top: 54%;
+      transform: translate(-50%, -50%);
       display: flex;
-      align-items: center;
       justify-content: center;
-      width: 100%;
-      gap: 16px;
+      align-items: center;
+      width: auto;
+      z-index: 1;
     }
 
     .logo-section img {
       max-width: 280px;
-      width: 80%;
+      width: 80vw;
       height: auto;
       display: block;
-      margin: 36px auto 0 auto;
+      margin: 0 auto;
     }
 
     @media (min-width: 768px) {
       .logo-section img {
         max-width: 380px;
-        width: 95%;
+        width: 95vw;
       }
     }
 
@@ -127,25 +141,57 @@
       background-size: contain;
     }
 
-    .date-badge {
+    .date-badge.unified-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 0 24px;
+      color: #fff;
+      border: none;
       border-radius: 50px;
+      padding: 0 28px;
       font-size: 15px;
       font-weight: 600;
       box-shadow: var(--shadow-sm);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border: none;
-      height: 44px;
-      line-height: 1;
+      height: 48px;
+      min-width: 210px;
     }
 
-    .date-badge::before {
-      content: "📊";
+    .date-badge.unified-badge .date-icon {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .date-badge.unified-badge .date-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0 24px;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+      height: 44px;
+      min-width: 180px;
+      justify-content: center;
+    }
+
+    .date-badge.unified-badge .date-week {
       font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .date-badge.unified-badge .date-day {
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 1px;
     }
 
     .pdf-btn {
@@ -214,14 +260,16 @@
 
     .pdf-link {
       color: var(--primary-blue);
-      text-decoration: none;
+      text-decoration: underline;
       font-weight: 600;
       border-bottom: 2px solid transparent;
       transition: var(--transition);
+      text-underline-offset: 4px;
     }
 
     .pdf-link:hover {
-      border-bottom-color: var(--primary-blue);
+      border-bottom-color: transparent;
+      text-decoration: underline;
     }
 
     /* Enhanced Card Grid */
@@ -414,10 +462,64 @@
         padding: 0 16px;
       }
 
-      .header-content {
+      .header {
+        border-bottom-left-radius: 9px;
+        border-bottom-right-radius: 9px;
+        padding: 24px 0 18px 0;
+      }
+      .header-row {
         flex-direction: column;
-        gap: 16px;
-        text-align: center;
+        align-items: center;
+        position: static;
+        min-height: 120px;
+      }
+      .header-date {
+        position: static;
+        right: auto;
+        top: auto;
+        font-size: 13px;
+        margin-bottom: 8px;
+        width: 100%;
+        justify-content: center;
+      }
+      .logo-section {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 100%;
+        justify-content: center;
+        margin-top: 0;
+      }
+      .logo-section img {
+        max-width: 260px;
+        width: 85vw;
+      }
+      .header-row > div {
+        width: 100% !important;
+        min-width: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .date-badge {
+        margin-top: 0 !important;
+        margin-bottom: 18px !important;
+      }
+      .pdf-download.header-pdf {
+        align-items: center !important;
+        justify-content: center !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        margin: 24px auto 0 auto !important;
+      }
+      .pdf-download.header-pdf > a {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
       }
 
       .hero-title {
@@ -451,6 +553,22 @@
         width: 100%;
         justify-content: center;
         padding: 12px 0;
+      }
+
+      .header-right-col {
+        flex-direction: column-reverse !important;
+        align-items: center !important;
+        gap: 0 !important;
+      }
+      .date-text-info {
+        margin-bottom: 0;
+        margin-top: 32px;
+      }
+      .date-week-text {
+        font-size: 20px;
+      }
+      .date-day-text {
+        font-size: 12px;
       }
     }
 
@@ -492,25 +610,109 @@
     .news-card:nth-child(2) { animation-delay: 0.2s; }
     .news-card:nth-child(3) { animation-delay: 0.3s; }
     .news-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .date-text-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+    .date-week-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .date-day-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      opacity: 0.85;
+      margin-top: 1px;
+    }
+    @media (max-width: 768px) {
+      .date-text-info {
+        align-items: center;
+        margin-bottom: 32px;
+      }
+      .date-week-text {
+        font-size: 17px;
+      }
+      .date-day-text {
+        font-size: 12px;
+      }
+    }
+
+    .pdf-download.header-pdf > a > div {
+      max-width: 380px;
+      width: 100%;
+      min-width: 0;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid #E8EAED;
+      background: #fff;
+    }
+
+    /* PDF 박스가 카드뉴스(news-card)와 동일한 너비가 되도록 강제 */
+    .pdf-download.header-pdf {
+      width: 100%;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pdf-download.header-pdf .pdf-box {
+      width: 100%;
+      max-width: 380px;
+      min-width: 0;
+      border-radius: 16px;
+      box-sizing: border-box;
+    }
+
+    /* 모바일에서 news-card와 pdf-box width 동일하게 */
+    @media (max-width: 768px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .pdf-download.header-pdf {
+        max-width: 100%;
+        width: 100%;
+      }
+      .pdf-download.header-pdf .pdf-box {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="header">
       <div class="header-content">
-        <div class="logo-section">
-          <img src="logo.png" alt="모빌리티 주간동향 로고" />
-        </div>
         <div class="header-row">
-          <div class="date-badge">25-05-26</div>
-          <a href="https://drive.google.com/file/d/1Fz6nepkdMhbev2tXvDo-8LJWQMi9o0Wc/view?usp=drive_link" target="_blank" class="pdf-btn">
-            <span class="pdf-icon">📄</span>
-            <span class="pdf-btn-text">동향 보고서(PDF)</span>
-          </a>
+          <div class="header-date">
+            <span class="date-week-text">2025년 5월 셋째주</span>
+          </div>
+          <div class="logo-section">
+            <img src="logo.png" alt="모빌리티 주간동향 로고" />
+          </div>
         </div>
       </div>
     </header>
 
+    <div class="pdf-download header-pdf" style="margin-top: 32px; margin-bottom: 24px; display: flex; justify-content: center;">
+      <a href="https://drive.google.com/file/d/1Fz6nepkdMhbev2tXvDo-8LJWQMi9o0Wc/view?usp=drive_link" target="_blank" style="text-decoration: none;">
+        <div class="pdf-box" style="background: #fff; border: 1px solid #E8EAED; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; min-width: 0; max-width: 380px; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="pdf" width="34" style="vertical-align:middle;opacity:0.78; margin-right: 2px;" />
+            <div class="pdf-content" style="display: flex; flex-direction: column;">
+              <span class="pdf-link" style="font-size: 16px; font-weight: 700; color: #0066FF; margin-bottom: 2px;">주간 동향 보고서 원문(PDF)보기</span>
+            </div>
+          </div>
+          <span style="font-size: 13px; color: #5A6573; margin-top: 6px;">클릭하시면 최신 주간 동향 PDF 파일을 새 창에서 확인하실 수 있습니다.</span>
+        </div>
+      </a>
+    </div>
     <div class="news-grid">
       <article class="news-card">
         <div class="news-image">
@@ -552,7 +754,7 @@
           <span class="news-category">광주</span>
           <h2 class="news-title">홍보캐릭터 대전</h2>
           <p class="news-summary">
-            ‘광주방문의 해’를 맞아 시청 야외에서 ‘빛돌이’ 캐릭터 결혼식 이벤트가 24일 열렸습니다. 전국 지자체 캐릭터들이 하객으로 참여하며 지역 홍보와 콘텐츠산업 활성화를 동시에 꾀했습니다.
+            '광주방문의 해'를 맞아 시청 야외에서 '빛돌이' 캐릭터 결혼식 이벤트가 24일 열렸습니다. 전국 지자체 캐릭터들이 하객으로 참여하며 지역 홍보와 콘텐츠산업 활성화를 동시에 꾀했습니다.
           </p>
           <div class="news-footer">
             <a href="https://sports.donga.com/news/article/all/20250519/131633507/1" class="news-link" target="_blank">자세히 보기</a>
